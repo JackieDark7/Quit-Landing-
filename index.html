@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quit — Break Free. For Good. | The Mindful Way to Quit Smoking</title>
+    <title>Break free. For good. | The Mindful Way to Quit.</title>
     <meta name="description" content="Quit is the science-backed app that helps you break free from the habits holding you back — with crave timers, breathing exercises, voice journaling, healing timelines, and savings tracking. Sign up to get notified at launch.">
     <meta name="keywords" content="quit app, break bad habits, addiction recovery, crave timer, breathing exercises, quit tracker, cessation app, quit smoking, quit vaping, quit nicotine">
     <meta name="author" content="Quit">
@@ -1872,8 +1872,21 @@
         </p>
 
         <div class="hero-ctas">
-            <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Join the waitlist</button>
-            <button class="btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">See what's coming</button>
+            <div class="signup-form" id="heroSignupForm">
+                <div class="signup-input-wrap">
+                    <input type="email" class="signup-input" id="heroEmailInput" placeholder="Your email address" autocomplete="email" required>
+                    <button class="signup-btn" id="heroSignupBtn" onclick="handleHeroSignup()">Notify Me</button>
+                </div>
+                <p class="signup-note">No spam. Just one email when we launch.</p>
+            </div>
+
+            <div class="signup-success" id="heroSignupSuccess" style="display:none;">
+                <div class="signup-success-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                </div>
+                <p class="signup-success-text">You're on the list.</p>
+                <p class="signup-success-sub">We'll reach out when it's time.</p>
+            </div>
         </div>
 
 
@@ -2543,8 +2556,8 @@
         //         https://app.kit.com/forms/designers/123456
         //         That number at the end is your Form ID. Paste it below.
         //
-        const KIT_API_KEY = '76Q3KX-FMhaX87fWKbx3Fg';   // e.g. 'abc123def456'
-        const KIT_FORM_ID = '9129894';   // e.g. '7654321'
+        const KIT_API_KEY = '';   // e.g. 'abc123def456'
+        const KIT_FORM_ID = '';   // e.g. '7654321'
         //
         // That's it. Emails will now land in your Kit subscriber list.
         //
@@ -2604,6 +2617,58 @@
         if (emailInput) {
             emailInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') handleSignup();
+            });
+        }
+
+        // ═══ Hero Email Signup Handler ═══
+        async function handleHeroSignup() {
+            const input = document.getElementById('heroEmailInput');
+            const btn = document.getElementById('heroSignupBtn');
+            const email = input.value.trim();
+
+            if (!email || !email.includes('@') || !email.includes('.')) {
+                input.style.outline = '2px solid #C44D4D';
+                input.focus();
+                setTimeout(() => input.style.outline = '', 2000);
+                return;
+            }
+
+            btn.textContent = 'Joining...';
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+
+            try {
+                if (KIT_API_KEY && KIT_FORM_ID) {
+                    const res = await fetch(`https://api.convertkit.com/v3/forms/${KIT_FORM_ID}/subscribe`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+                        body: JSON.stringify({
+                            api_key: KIT_API_KEY,
+                            email: email
+                        })
+                    });
+
+                    if (!res.ok) throw new Error('Signup failed');
+                } else {
+                    console.warn('⚠️  KIT_API_KEY or KIT_FORM_ID not set.');
+                    console.log('    Email entered:', email);
+                }
+
+                document.getElementById('heroSignupForm').style.display = 'none';
+                document.getElementById('heroSignupSuccess').style.display = 'block';
+
+            } catch (err) {
+                console.error('Signup error:', err);
+                btn.textContent = 'Try again';
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }
+        }
+
+        const heroEmailInput = document.getElementById('heroEmailInput');
+        if (heroEmailInput) {
+            heroEmailInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') handleHeroSignup();
             });
         }
     </script>
