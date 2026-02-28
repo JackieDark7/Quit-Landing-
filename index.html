@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quit | Break free. For good. | The Mindful Way to Quit.</title>
+    <title>Break free. For good. | The Mindful Way to Quit.</title>
     <meta name="description" content="Quit is the science-backed app that helps you break free from the habits holding you back — with crave timers, breathing exercises, voice journaling, healing timelines, and savings tracking. Sign up to get notified at launch.">
     <meta name="keywords" content="quit app, break bad habits, addiction recovery, crave timer, breathing exercises, quit tracker, cessation app, quit smoking, quit vaping, quit nicotine">
     <meta name="author" content="Quit">
@@ -1766,6 +1766,13 @@
             .phone-screen { inset: 10px; border-radius: 30px; }
             .carousel-slide { width: calc(260px - 20px); }
 
+            /* Timer slide mobile scaling */
+            .mock-timer-ring { width: 120px !important; height: 120px !important; margin-bottom: 12px !important; }
+            .mock-timer-ring svg circle { cx: 61; cy: 61; r: 60; }
+            .mock-timer-time { font-size: 26px !important; }
+            .mock-box-breath { transform: scale(0.78) !important; margin-bottom: -4px !important; }
+            .mock-box-phase { font-size: 12px !important; }
+
             .how-steps::before { left: 20px; }
             .how-step { gap: 20px; }
             .how-step-marker { width: 40px; height: 40px; font-size: 16px; }
@@ -1829,9 +1836,33 @@
             .mock-greeting { font-size: 17px; }
             .mock-card { padding: 10px; border-radius: 10px; }
             .mock-card-text { font-size: 11px; }
-            .mock-timer-ring { width: 110px; height: 110px; }
-            .mock-timer-time { font-size: 24px; }
+            .mock-timer-ring { width: 90px !important; height: 90px !important; margin-bottom: 8px !important; }
+            .mock-timer-ring svg { inset: -1px !important; }
+            .mock-timer-time { font-size: 20px !important; }
+            .mock-timer-label { font-size: 6px !important; }
+            .mock-timer-title { font-size: 16px !important; }
+            .mock-timer-sub { font-size: 8px !important; margin-bottom: 12px !important; }
+            .mock-box-breath { transform: scale(0.6) !important; margin-bottom: -10px !important; margin-top: -10px !important; }
+            .mock-box-phase { font-size: 10px !important; }
+            .mock-side-label { font-size: 5px !important; }
+            .mock-side-label.top { top: -12px !important; }
+            .mock-side-label.bottom { bottom: -12px !important; }
+            .mock-side-label.right { right: -8px !important; }
+            .mock-side-label.left { left: -8px !important; }
             .mock-voice-time { font-size: 36px; }
+            /* Shrink the stop button and stat cards in timer slide on small screens */
+            .carousel-slide:first-child .phone-content > div[style*="44px"] {
+                width: 32px !important; height: 32px !important; margin-bottom: 10px !important;
+            }
+            .carousel-slide:first-child .phone-content > div[style*="44px"] > div {
+                width: 9px !important; height: 9px !important;
+            }
+            .carousel-slide:first-child .mock-card {
+                padding: 8px 6px !important;
+            }
+            .carousel-slide:first-child .mock-card div[style*="font-size:17px"] {
+                font-size: 13px !important;
+            }
         }
     </style>
 </head>
@@ -1921,7 +1952,7 @@
                         <div class="mock-timer-sub">Time it. Watch it pass.</div>
 
                         <div class="mock-timer-ring" style="width:150px; height:150px; margin-bottom:16px;">
-                            <svg style="position:absolute; inset:-1px; width:calc(100% + 2px); height:calc(100% + 2px); transform:rotate(-90deg);">
+                            <svg viewBox="0 0 152 152" style="position:absolute; inset:-1px; width:calc(100% + 2px); height:calc(100% + 2px); transform:rotate(-90deg);">
                                 <circle cx="76" cy="76" r="74" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-dasharray="465" stroke-dashoffset="140" style="filter:drop-shadow(0 0 4px rgba(201,168,76,0.4));"/>
                             </svg>
                             <div class="mock-timer-display">
@@ -2556,8 +2587,8 @@
         //         https://app.kit.com/forms/designers/123456
         //         That number at the end is your Form ID. Paste it below.
         //
-        const KIT_API_KEY = '';   // e.g. 'abc123def456'
-        const KIT_FORM_ID = '';   // e.g. '7654321'
+        const KIT_API_KEY = '76Q3KX-FMhaX87fWKbx3Fg';   // e.g. 'abc123def456'
+        const KIT_FORM_ID = '9129894';   // e.g. '7654321'
         //
         // That's it. Emails will now land in your Kit subscriber list.
         //
